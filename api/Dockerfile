@@ -1,13 +1,13 @@
 FROM python:3.6.9-alpine
 
-ADD requirements.txt ${INSTALL_PATH}
+WORKDIR /app
 
-RUN apk add --no-cache git && \
-    pip install -r ${INSTALL_PATH}/requirements.txt
+COPY ./requirements.txt requirements.txt
 
-ADD broadway ${INSTALL_PATH}/broadway
+RUN pip install -r requirements.txt
 
-ENV PYTHONPATH "${PYTHONPATH}:${INSTALL_PATH}"
+COPY . /app
 
-ENTRYPOINT ["python", "-m", "broadway.api"]
-CMD []
+ENTRYPOINT ["python"]
+
+CMD ["app.py"]
