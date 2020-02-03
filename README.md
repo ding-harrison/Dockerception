@@ -33,3 +33,18 @@ your new working directory will be empty as well
 Run the reader
 $ docker run -it -v dockerception:/data reader
 
+## Running docker in docker
+This is actually rather simple. In the docker image you have, you will require it to have docker installed. 
+If you're using alpine, you can simply include this line in your Dockerfile
+
+$ apk add docker
+
+With that line, we have docker now installed in the image, and we can run the container with the following command
+
+$ docker run -v /var/run/docker.sock:/var/run/docker.sock -it <image_name>
+
+Doing this will run the docker container with the dockerd daemon (from the host) attached onto it. Thus, whenever
+you run any docker command inside of said container, you will see exactly what is seen when you run docker from outside
+of the container. If you run something like "docker ps" in the container, the container itself should pop up.
+
+
