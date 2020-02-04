@@ -1,5 +1,8 @@
 from flask import Flask
+import docker
 app = Flask(__name__)
+
+d_client = docker.from_env()
 
 @app.route("/")
 def hello_world():
