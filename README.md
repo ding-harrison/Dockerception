@@ -12,17 +12,23 @@ $ source venv/bin/activate
 I created a couple of sample programs (reader and writer) with the intention of learning to use volumes.
 
 Construct a volume with the name dockerception
+
 $ docker volume create dockerception 
 
 Build the writer
+
 $ cd writer
+
 $ docker build -t writer .
 
 Build the reader
+
 $ cd reader
+
 $ docker build -t reader .
 
 Run the writer
+
 $ docker run -it -v dockerception:/data writer
 
 Note: What the -v flag does is mount the volume "dockerception" at the location /data in your docker image
@@ -31,6 +37,7 @@ otherwise your working directory will be replaced with what is in your volume. I
 your new working directory will be empty as well
 
 Run the reader
+
 $ docker run -it -v dockerception:/data reader
 
 ## Running docker in docker
